@@ -29,7 +29,16 @@ export default function CurrencyConvertor() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      setCurrencyName(Object.entries(result.symbols));
+      const cur = [];
+      Object.entries(result.symbols).map((data) => {
+        const temp = data[0];
+        data[0] = data[1];
+        data[1] = temp;
+        const temparr = [data[0], data[1]];
+        cur.push(temparr);
+      });
+      cur.sort();
+      setCurrencyName(cur);
     } catch (error) {
       console.error(error);
     }
@@ -39,8 +48,7 @@ export default function CurrencyConvertor() {
   }, []);
 
   async function counverCur() {
-    const url =
-      `https://currency-conversion-and-exchange-rates.p.rapidapi.com/convert?from=${fromCn}&to=${toCn}&amount=${currentAmount}`;
+    const url = `https://currency-conversion-and-exchange-rates.p.rapidapi.com/convert?from=${fromCn}&to=${toCn}&amount=${currentAmount}`;
     const options = {
       method: "GET",
       headers: {
@@ -79,8 +87,8 @@ export default function CurrencyConvertor() {
           className="p-3 rounded-md "
         >
           {currencyName.map(([key, value]) => (
-            <option className="text-slate-950" value={key} key={key}>
-              {value}
+            <option className="text-slate-950" value={value} key={key}>
+              {key}
             </option>
           ))}
         </select>
@@ -90,8 +98,8 @@ export default function CurrencyConvertor() {
           className="p-3 rounded-md "
         >
           {currencyName.map(([key, value]) => (
-            <option className="text-slate-950" value={key} key={key}>
-              {value}
+            <option className="text-slate-950" value={value} key={key}>
+              {key}
             </option>
           ))}
         </select>
@@ -103,6 +111,11 @@ export default function CurrencyConvertor() {
         </button>
         <p className="text-white text-xl">
           Resultant Amount : <span>{resultantAmount}</span>
+        </p>
+      </div>
+      <div className="absolute bottom-5 w-full text-center ">
+        <p className="text-white text-xl ">
+          Design and Developed By Santhosh S <sup className="text-lg">©️</sup>
         </p>
       </div>
     </div>
