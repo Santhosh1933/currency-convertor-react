@@ -63,7 +63,7 @@ export default function CurrencyConvertor() {
   return (
     <div className="w-full min-h-[100vh] max-h-fit bg-slate-800">
       <h1 className="h-[10vh] bg-cyan-700 text-center justify-center items-center flex text-2xl text-white uppercase">
-        Currency Convertor
+        Currency Convertor 💸
       </h1>
       <div className="my-10 w-3/4 md:w-2/4 flex flex-col gap-5 mx-auto">
         <p className="text-white text-xl">Enter the Amount :</p>
